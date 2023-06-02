@@ -1,10 +1,10 @@
 import './App.css';
-import RentIt from './RentIt';
+import OfferList from './OfferList';
 
 function App() {
   return (
     <div className="App">
-        <RentIt />
+        <OfferList />
     </div>
   );
 }
