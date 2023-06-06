@@ -4,7 +4,7 @@ import Offer from './Offer';
 
 const OfferList = () => {
     const [newOffer, setNewOffer] = useState({id: '', type: '', area: '', price: '', rooms: ''});
-    const [offerList, setOfferList] = useState([])
+    const [offerList, setOfferList] = useState([]);
 
     useEffect(()=>{
         const fetchOffers = async()=>{
@@ -17,7 +17,7 @@ const OfferList = () => {
     }, []);
 
     const inputChanged = (event) =>{
-        setNewOffer({...newOffer, [event.target.name]: event.target.value})
+        setNewOffer({...newOffer, [event.target.name]: event.target.value});
     }
 
     const addOffer = async (event) => {
@@ -34,11 +34,15 @@ const OfferList = () => {
         }
     }
 
-    const deleteOffer = async(event) => {
+    const deleteOffer = (id) => {
+        setOfferList(offerList.filter((offer,index) => index !== id));
+      }
+
+    const takeOffer = () => {
 
     }
 
-    const takeOffer = () => {
+    const planningScheme = () => {
 
     }
 
@@ -53,7 +57,7 @@ const OfferList = () => {
                 <input type='submit' value='Add offer'/>
             </form>
             <br/>
-            <Offer offerList={offerList} addOffer={addOffer} deleteOffer={deleteOffer} takeOffer={takeOffer}/>
+            <Offer offerList={offerList} addOffer={addOffer} deleteOffer={deleteOffer} takeOffer={takeOffer} planningScheme={planningScheme} />
         </div>
     )
 }
