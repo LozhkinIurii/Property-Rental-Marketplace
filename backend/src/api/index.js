@@ -26,9 +26,17 @@ let apartments = [
 ]
 
 router.get('/', (req, res) => {
-    res.json(
-        apartments.map((item)=>item)
-    );
+    res.json(apartments);
+});
+
+router.get('/:id', (req, res) => {
+    const {id} = req.params;
+    const offer = apartments.find(offer => offer.id === Number(id));
+    if (offer){
+        res.status(200).json(offer);
+    } else {
+        res.status(404).json({message: 'Not found'});
+    }
 });
 
 router.post('/added', (req, res) => {
