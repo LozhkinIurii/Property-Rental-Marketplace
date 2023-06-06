@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-apartments = [
+let apartments = [
     {
         id: 1,
         type: "Apartment",
@@ -30,5 +30,12 @@ router.get('/', (req, res) => {
         apartments.map((item)=>item)
     );
 });
+
+router.post('/added', (req, res) => {
+    const data = req.body;
+    console.log(data);
+    res.json(data);
+});
+
 
 module.exports = router;

@@ -16,11 +16,19 @@ const OfferList = () => {
         fetchOffers();
     }, []);
 
+    const inputChanged = (event) =>{
+        setNewOffer({...newOffer, [event.target.name]: event.target.value})
+    }
+
     const addOffer = async (event) => {
-        await event.preventDefault();
+        event.preventDefault();
         if (newOffer.type && newOffer.area && newOffer.price && newOffer.rooms){
-            setOfferList([...offerList, newOffer])
-            setNewOffer({...newOffer, type: '', area: '', price: '', rooms: ''})
+            if (isNaN(+newOffer.type) && !isNaN(+newOffer.area) && !isNaN(+newOffer.price) && Number.isInteger(+newOffer.rooms)){
+                setOfferList([...offerList, newOffer])
+                setNewOffer({...newOffer, type: '', area: '', price: '', rooms: ''})
+            } else {
+                alert("Make sure that the 'Accomodation type' is a text, 'Area' and 'Price' are numbers and 'Rooms' is integer.")
+            }
         } else {
             alert("Please, fill all the fields.")
         }
@@ -28,11 +36,6 @@ const OfferList = () => {
 
     const deleteOffer = async(event) => {
 
-    }
-
-
-    const inputChanged = (event) =>{
-        setNewOffer({...newOffer, [event.target.name]: event.target.value})
     }
 
     const takeOffer = () => {
@@ -50,7 +53,7 @@ const OfferList = () => {
                 <input type='submit' value='Add offer'/>
             </form>
             <br/>
-            <Offer offerList={offerList} addOffer={addOffer} deleteOffer={deleteOffer}/>
+            <Offer offerList={offerList} addOffer={addOffer} deleteOffer={deleteOffer} takeOffer={takeOffer}/>
         </div>
     )
 }

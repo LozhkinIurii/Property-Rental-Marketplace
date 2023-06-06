@@ -17,7 +17,7 @@ const Offer = props => {
                         <td>{offer.area}</td>
                         <td>{offer.price}</td>
                         <td>{offer.rooms}</td>
-                        <td><button id="deletebtn" onClick={props.deleteOffer}>Delete offer</button><button id="rentbtn" onClick={props.takeOffer}>Rent it!</button></td>
+                        <td><button id="rentbtn" onClick={props.takeOffer}>Rent it!</button><button id="planning">See planning scheme</button><button id="deletebtn" onClick={props.deleteOffer}>Delete offer</button></td>
                     </tr>
                     )
                 }
