@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+// Dummy offers
 let apartments = [
     {
         id: 1,
@@ -39,10 +40,11 @@ router.get('/:id', (req, res) => {
     }
 });
 
-router.post('/added', (req, res) => {
+router.post('/', (req, res) => {
     const data = req.body;
     console.log(data);
-    res.json(data);
+    apartments.push(data);
+    res.json("Added");
 });
 
 
