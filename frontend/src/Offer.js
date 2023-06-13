@@ -21,6 +21,9 @@ const Offer = props => {
                     </tr>
                     )
                 }
+                {
+                    props.changeId(props.offerList.length + 1)
+                }
             </tbody>
         </table>
     )

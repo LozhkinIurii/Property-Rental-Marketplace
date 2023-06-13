@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
     res.json({
-        message: 'Property Rental Marketplace',
+        message: "Use 'http://localhost:5000/api' to see api.",
     });
 });
 
