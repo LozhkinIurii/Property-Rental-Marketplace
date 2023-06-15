@@ -1,4 +1,11 @@
+import React from "react";
+
+
 const Offer = props => {
+    React.useEffect(() => {
+      props.changeId(props.offerList.length + 1);
+    });
+
     return (
         <table>
             <tbody>
@@ -20,9 +27,6 @@ const Offer = props => {
                         <td><button id="rentbtn" onClick={props.takeOffer}>Rent it!</button><button id="planning">See planning scheme</button><button id="deletebtn" onClick={() => props.deleteOffer(index)}>Delete offer</button></td>
                     </tr>
                     )
-                }
-                {
-                    props.changeId(props.offerList.length + 1)
                 }
             </tbody>
         </table>

@@ -6,10 +6,10 @@ const OfferList = () => {
     const [newOffer, setNewOffer] = useState({id: '', type: '', area: '', price: '', rooms: ''});
     const [offerList, setOfferList] = useState([]);
     const [id, setId] = useState(0);
+    const url = "http://localhost:5000/api/"
 
     useEffect(()=>{
         const fetchOffers = async()=>{
-            let url = "http://localhost:5000/api/";
             const response = await fetch(url);
             const data = await response.json();
             setOfferList(data);
@@ -40,7 +40,7 @@ const OfferList = () => {
         if (newOffer.type && newOffer.area && newOffer.price && newOffer.rooms) {
             if (isNaN(+newOffer.type) && !isNaN(+newOffer.area) && !isNaN(+newOffer.price) && Number.isInteger(+newOffer.rooms)) {
                 try {
-                    const response = await fetch('http://localhost:5000/api/', {
+                    const response = await fetch(url, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -64,9 +64,24 @@ const OfferList = () => {
         }
     };
 
-    const deleteOffer = (id) => {
+    const deleteOffer = async (id) => {
         setOfferList(offerList.filter((offer,index) => index !== id));
-      }
+        try {
+            const response = await fetch(url + id+1, {
+                method: 'DELETE',
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (response.ok){
+                console.log('Deleted successfully ' + id);
+            } else {
+                console.log('Error occured');
+            }
+        } catch(error) {
+            console.error(error);
+        }
+    }
 
     const takeOffer = () => {
 
@@ -91,7 +106,7 @@ const OfferList = () => {
                 <input type='submit' value='Add offer'/>
             </form>
             <br/>
-            <Offer offerList={offerList} addOffer={addOffer} deleteOffer={deleteOffer} takeOffer={takeOffer} planningScheme={planningScheme} changeId={changeId}/>
+            <Offer offerList={offerList} deleteOffer={deleteOffer} takeOffer={takeOffer} planningScheme={planningScheme} changeId={changeId}/>
         </div>
     )
 }
